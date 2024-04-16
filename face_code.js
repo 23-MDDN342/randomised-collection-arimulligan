@@ -82,6 +82,7 @@ function blockyFace(thinness_value) {
   ellipse( 2, -4, 1);
 }
 
+// the sheep i wanna draw https://www.google.com/search?sca_esv=4a83ddc72bf1c867&q=sheep+nose+cartoon&tbm=isch&source=lnms&prmd=ivsnmbtz&sa=X&ved=2ahUKEwjvta667sWFAxXn2TQHHSnhCdoQ0pQJegQIDRAB&biw=1280&bih=1243&dpr=2#imgrc=G0XZ6ePwdyRXeM&imgdii=ExdgUrpYcAC4HM 
 function mostJoyfulSheep(fluffiness, eyeSize, faceSize, eyeLashLength, woolColour, pupilDirectionX, pupilDirectionY, earAngles){
   let centerX = 0;
   let centerY = 0;
