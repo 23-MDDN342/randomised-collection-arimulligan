@@ -39,7 +39,7 @@ function setup () {
   slider9.parent('slider9Container');
   slider10.parent('slider10Container');
 
-  faceGuideCheckbox = createCheckbox('', false);
+  faceGuideCheckbox = createCheckbox('', true);
   faceGuideCheckbox.parent('checkbox1Container');
 
   faceSelector = createSelect();
@@ -86,9 +86,12 @@ function draw () {
   if (mode == '1') {
    // draw face using values mapped from 3 sliders
    let tilt_value = map(s1, 0, 100, -90, 90);
-   let mouth_value = map(s2, 0, 100, 0.5, 10);
+   let mouth_value = map(s2, 0, 100, 0.5, 20);
    let eye_value = int(map(s3, 0, 100, 1, 3));
-   orangeAlienFace(tilt_value, eye_value, mouth_value);
+   let woolColour = color(123, 3, 5, 50)
+   let eyeLashLength = map(s4, 0, 100, 1.5, 2.4)
+   let eyeSize = map(s5, 0, 100, 1, 4)
+   mostJoyfulSheep(3, eyeSize, mouth_value, eyeLashLength, woolColour, 0, 1, 0);
   }
 
   if (mode == '2') {
