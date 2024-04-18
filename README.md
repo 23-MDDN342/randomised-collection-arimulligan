@@ -5,4 +5,7 @@
 
 >This starter code is just some simple faces being drawn. 
 
+In the first few weeks, I am deciding on creating different sheeps' faces with varying inputs. The inputs that I will be keeping the ame are the facial expressions - as I will be making a joyful sheep face in the middle with sadder faces going further out from these happier faces. 
+Currently trying to work on the wool around the face to change. 
 
+The purpose for doing this was to show someone who has the joy of the Lord set before them, and the light and love that they can share with the people around them. It is also how people who don't have Jesus in their life are lost sheep. 

@@ -83,31 +83,48 @@ function blockyFace(thinness_value) {
 }
 
 // the sheep i wanna draw https://www.google.com/search?sca_esv=4a83ddc72bf1c867&q=sheep+nose+cartoon&tbm=isch&source=lnms&prmd=ivsnmbtz&sa=X&ved=2ahUKEwjvta667sWFAxXn2TQHHSnhCdoQ0pQJegQIDRAB&biw=1280&bih=1243&dpr=2#imgrc=G0XZ6ePwdyRXeM&imgdii=ExdgUrpYcAC4HM 
-function mostJoyfulSheep(fluffiness, eyeSize, faceSize, eyeLashLength, woolColour, pupilDirectionX, pupilDirectionY, earAngles){
+function mostJoyfulSheep(fluffiList, eyeSize, faceSize, eyeLashLength, woolColour, pupilDirectionX, pupilDirectionY, earAngles){
   let centerX = 0;
   let centerY = 0;
   let distactBetweenEyes = 5;
-  stroke(0);
+  let cream = color(250, 249, 230);
+  let navyblue = color(54, 49, 92);
+  stroke(navyblue);
+  strokeWeight(0.3);
   
+  // draw wool
+  for (let i = 0; i< fluffiList.length; i++){
+    circle(fluffiList[i].x, fluffiList[i].y, 2)
+  }
+
+  // ears
+  drawEars(3, -4, PI/4);
+  push();
+  scale(-1, 1)
+  drawEars(3, -4, PI/4);
+  pop();
+
   // Face
-  fill('cream');
+  fill(cream);
   ellipse(centerX, centerY, faceSize, faceSize*1.05);
 
   // Pupils
-  fill(0);
+  fill(navyblue);
   let pupilX = centerX - distactBetweenEyes/2 + pupilDirectionX * 0.5;
   let pupilY = centerY - faceSize*0.1 + pupilDirectionY * 0.5;
-  ellipse(pupilX, pupilY, eyeSize*0.5, eyeSize*0.5);
   line(pupilX, pupilY, pupilX-1, pupilY) // eyelashes
+  ellipse(pupilX, pupilY, eyeSize*0.5, eyeSize*0.5);
   let pupilX2 = centerX + distactBetweenEyes/2 + pupilDirectionX * 0.5;
   let pupilY2 = centerY - faceSize*0.1 + pupilDirectionY * 0.5;
-  ellipse(pupilX2, pupilY2, eyeSize*0.5, eyeSize*0.5);
   line(pupilX2, pupilY2, pupilX2+1, pupilY2)
+  ellipse(pupilX2, pupilY2, eyeSize*0.5, eyeSize*0.5);
 
-  let leftynose = 2.5;
-  let downynose = 1;
-  let sizeX = 0.6
-  let sizeY = 0.4;
+  // rosy cheeks
+  fill('pink')
+  noStroke();
+  circle(3, 1.5, 2)
+  circle(-3, 1.5, 2)
+
   // nose arc
   push();
   noFill();
@@ -116,18 +133,6 @@ function mostJoyfulSheep(fluffiness, eyeSize, faceSize, eyeLashLength, woolColou
   scale(1.5, 1)
   arc(0, 1.7, 1.5, 1.5, PI, 0, OPEN);
   pop();
-
-  // // left mouth
-  // push();
-  // rotate(radians(45));
-  // ellipse(centerX+leftynose, centerY+downynose, sizeX, sizeY);
-  // pop();
-  
-  // // right mouth
-  // push();
-  // rotate(radians(-45));
-  // ellipse(centerX-leftynose, centerY+downynose, sizeX, sizeY);
-  // pop();
   
   // mid mouth
   ellipse(centerX, centerY+2.5, 0.2, 0.6);
@@ -144,11 +149,27 @@ function mostJoyfulSheep(fluffiness, eyeSize, faceSize, eyeLashLength, woolColou
   // smile 
   push();
   noFill();
-  stroke(0)
-  strokeWeight(0.2)
+  stroke(navyblue);
+  strokeWeight(0.3)
   scale(1.5, 1)
   arc(-0.5, 3, 1, 1, 0, PI, OPEN);
   arc(0.5, 3, 1, 1, 0, PI, OPEN);
+  pop();
+
+
+}
+
+function drawEars(x, y, rotation){
+  push();
+  rotate(rotation);
+  translate(rotation, -rotation)
+  fill(250, 249, 230);
+  arc(x, y, 5, 3, 0, PI, OPEN);
+  arc(x, y+0.1, 5, 2, PI, 0, OPEN);
+  arc(x, y+0.5, 3.5, 1, PI, 0, OPEN);
+  fill(227, 132, 163, 200) //transparent pink 
+  noStroke();
+  ellipse(x, y+0.55, 3.5, 1)
   pop();
 }
 

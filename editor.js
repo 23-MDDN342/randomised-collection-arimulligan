@@ -88,10 +88,11 @@ function draw () {
    let tilt_value = map(s1, 0, 100, -90, 90);
    let mouth_value = map(s2, 0, 100, 0.5, 20);
    let eye_value = int(map(s3, 0, 100, 1, 3));
-   let woolColour = color(123, 3, 5, 50)
-   let eyeLashLength = map(s4, 0, 100, 1.5, 2.4)
-   let eyeSize = map(s5, 0, 100, 1, 4)
-   mostJoyfulSheep(3, eyeSize, mouth_value, eyeLashLength, woolColour, 0, 1, 0);
+   let woolColour = color(123, 3, 5, 50);
+   let eyeLashLength = map(s4, 0, 100, 1.5, 2.4);
+   let eyeSize = map(s5, 0, 100, 1, 4);
+   let fluffyList = getRandomCoordinates(10);
+   mostJoyfulSheep(fluffyList, eyeSize, mouth_value, eyeLashLength, woolColour, 0, 1, 0);
   }
 
   if (mode == '2') {
@@ -117,6 +118,21 @@ function draw () {
   }
 
   pop();
+}
+
+// from ChatGBT
+function getRandomCoordinates(numCoordinates) {
+  const coordinates = [];
+  const min = -3;
+  const max = 3;
+
+  for (let i = 0; i < numCoordinates; i++) {
+      const x = Math.floor(Math.random() * (max - min + 1)) + min;
+      const y = Math.floor(Math.random() * (max - min + 1)) + min;
+      coordinates.push({ x, y });
+  }
+
+  return coordinates;
 }
 
 function keyTyped() {
