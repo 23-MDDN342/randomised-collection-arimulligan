@@ -9,13 +9,13 @@ let slider1, slider2, slider3, slider4, slider5;
 let slider6, slider7, slider8, slider9, slider10;
 let faceSelector;
 let faceGuideCheckbox;
-
+let fluffyList
 function setup () {
 
   // create the drawing canvas, save the canvas element
   let main_canvas = createCanvas(canvasWidth, canvasHeight);
   main_canvas.parent('canvasContainer');
-
+  fluffyList = getRandomCoordinates(20);
   // create sliders
   slider1 = createSlider(0, 100, 50);
   slider2 = createSlider(0, 100, 50);
@@ -91,7 +91,7 @@ function draw () {
    let woolColour = color(123, 3, 5, 50);
    let eyeLashLength = map(s4, 0, 100, 1.5, 2.4);
    let eyeSize = map(s5, 0, 100, 1, 4);
-   let fluffyList = getRandomCoordinates(10);
+  
    mostJoyfulSheep(fluffyList, eyeSize, mouth_value, eyeLashLength, woolColour, 0, 1, 0);
   }
 
@@ -123,12 +123,14 @@ function draw () {
 // from ChatGBT
 function getRandomCoordinates(numCoordinates) {
   const coordinates = [];
-  const min = -3;
-  const max = 3;
+  const minY = -10;
+  const maxY = -4;
+  const minX = -5;
+  const maxX = 5;
 
   for (let i = 0; i < numCoordinates; i++) {
-      const x = Math.floor(Math.random() * (max - min + 1)) + min;
-      const y = Math.floor(Math.random() * (max - min + 1)) + min;
+      const x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+      const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
       coordinates.push({ x, y });
   }
 

@@ -86,18 +86,16 @@ function blockyFace(thinness_value) {
 function mostJoyfulSheep(fluffiList, eyeSize, faceSize, eyeLashLength, woolColour, pupilDirectionX, pupilDirectionY, earAngles){
   let centerX = 0;
   let centerY = 0;
-  let distactBetweenEyes = 5;
+  let distanceBetweenEyes = 5;
   let cream = color(250, 249, 230);
+  let middleCream = color(235, 240, 219);
   let navyblue = color(54, 49, 92);
-  stroke(navyblue);
-  strokeWeight(0.3);
+  let shadowCream = color(224, 224, 206);
+  let pink = color(227, 132, 163, 200);
   
-  // draw wool
-  for (let i = 0; i< fluffiList.length; i++){
-    circle(fluffiList[i].x, fluffiList[i].y, 2)
-  }
-
   // ears
+  stroke(shadowCream);
+  strokeWeight(0.3);
   drawEars(3, -4, PI/4);
   push();
   scale(-1, 1)
@@ -105,46 +103,41 @@ function mostJoyfulSheep(fluffiList, eyeSize, faceSize, eyeLashLength, woolColou
   pop();
 
   // Face
-  fill(cream);
-  ellipse(centerX, centerY, faceSize, faceSize*1.05);
+  drawFace(centerX, centerY, cream, shadowCream, faceSize)
 
+  // draw wool
+  for (let i = 0; i < fluffiList.length; i++){
+    let drawShine = false;
+    if (fluffiList[i].y > -5.5){
+      fill(shadowCream)
+    } else if (fluffiList[i].y > -8) {
+      fill(middleCream)
+    } else {
+      drawShine = true;
+      fill(cream);
+    }
+    noStroke();
+    circle(fluffiList[i].x, fluffiList[i].y, 5);
+
+    if (drawShine){
+      fill('white')
+      drawRoundedTriangle(fluffiList[i].x-1, fluffiList[i].y-1, 0.7, 0.7)
+    }
+  }
+  
   // Pupils
   fill(navyblue);
-  let pupilX = centerX - distactBetweenEyes/2 + pupilDirectionX * 0.5;
+  stroke(navyblue);
+  let pupilX = centerX - distanceBetweenEyes/2 + pupilDirectionX * 0.5;
   let pupilY = centerY - faceSize*0.1 + pupilDirectionY * 0.5;
   line(pupilX, pupilY, pupilX-1, pupilY) // eyelashes
   ellipse(pupilX, pupilY, eyeSize*0.5, eyeSize*0.5);
-  let pupilX2 = centerX + distactBetweenEyes/2 + pupilDirectionX * 0.5;
+  let pupilX2 = centerX + distanceBetweenEyes/2 + pupilDirectionX * 0.5;
   let pupilY2 = centerY - faceSize*0.1 + pupilDirectionY * 0.5;
-  line(pupilX2, pupilY2, pupilX2+1, pupilY2)
+  line(pupilX2, pupilY2, pupilX2+1, pupilY2) // line for eyelashes
   ellipse(pupilX2, pupilY2, eyeSize*0.5, eyeSize*0.5);
 
-  // rosy cheeks
-  fill('pink')
-  noStroke();
-  circle(3, 1.5, 2)
-  circle(-3, 1.5, 2)
-
-  // nose arc
-  push();
-  noFill();
-  stroke(0, 0, 0, 50)
-  strokeWeight(0.1)
-  scale(1.5, 1)
-  arc(0, 1.7, 1.5, 1.5, PI, 0, OPEN);
-  pop();
-  
-  // mid mouth
-  ellipse(centerX, centerY+2.5, 0.2, 0.6);
-
-  // nose
-  push();
-  scale(1.3, -0.7)
-  fill('pink')
-  noStroke();
-  drawRoundedTriangle(0, -3, 0.7, 0.7)
-  pop();
-  stroke(0)
+  drawCheeksAndNose(centerX, centerY, pink);
 
   // smile 
   push();
@@ -159,6 +152,46 @@ function mostJoyfulSheep(fluffiList, eyeSize, faceSize, eyeLashLength, woolColou
 
 }
 
+function drawCheeksAndNose(centerX, centerY, pink){
+  // rosy cheeks
+  fill(pink)
+  noStroke();
+  circle(3, 1.5, 2)
+  circle(-3, 1.5, 2)
+  
+  // mid mouth
+  ellipse(centerX, centerY+2.7, 0.4, 1);
+  //nostrils
+  push();
+  rotate(PI/3)
+  translate(2.4, -2)
+  ellipse(centerX, centerY+2.7, 0.4, 1);
+  pop();
+  push();
+  rotate(-PI/3)
+  translate(-2.4, -2)
+  ellipse(centerX, centerY+2.7, 0.4, 1);
+  pop();
+
+  // nose
+  push();
+  scale(1.6, -0.7)
+  fill('pink')
+  noStroke();
+  drawRoundedTriangle(0, -3, 0.7, 0.7)
+  pop();
+}
+
+function drawFace(centerX, centerY, mainColour, shadowColor, faceSize){
+  stroke(shadowColor);
+  fill(shadowColor)
+  ellipse(centerX, centerY, faceSize, faceSize*1.05);
+
+  noStroke();
+  fill(mainColour);
+  ellipse(centerX, centerY, faceSize-1.5, faceSize*1.05-1.5);
+}
+
 function drawEars(x, y, rotation){
   push();
   rotate(rotation);
@@ -167,7 +200,7 @@ function drawEars(x, y, rotation){
   arc(x, y, 5, 3, 0, PI, OPEN);
   arc(x, y+0.1, 5, 2, PI, 0, OPEN);
   arc(x, y+0.5, 3.5, 1, PI, 0, OPEN);
-  fill(227, 132, 163, 200) //transparent pink 
+  fill(199, 139, 159, 200) //transparent pink 
   noStroke();
   ellipse(x, y+0.55, 3.5, 1)
   pop();
