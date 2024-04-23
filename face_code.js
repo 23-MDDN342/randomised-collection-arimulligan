@@ -83,58 +83,82 @@ function blockyFace(thinness_value) {
 }
 
 // the sheep i wanna draw https://www.google.com/search?sca_esv=4a83ddc72bf1c867&q=sheep+nose+cartoon&tbm=isch&source=lnms&prmd=ivsnmbtz&sa=X&ved=2ahUKEwjvta667sWFAxXn2TQHHSnhCdoQ0pQJegQIDRAB&biw=1280&bih=1243&dpr=2#imgrc=G0XZ6ePwdyRXeM&imgdii=ExdgUrpYcAC4HM 
-function mostJoyfulSheep(fluffiList, eyeSize, faceSize, eyeLashLength, woolColour, pupilDirectionX, pupilDirectionY, earAngles){
+function mostJoyfulSheep(fluffiList, eyeSize, faceSize, ear_tilt, wool_colour, pupilDirectionX, pupilDirectionY, earrings){
   let centerX = 0;
   let centerY = 0;
   let distanceBetweenEyes = 5;
-  let cream = color(250, 249, 230);
-  let middleCream = color(235, 240, 219);
-  let navyblue = color(54, 49, 92);
-  let shadowCream = color(224, 224, 206);
+
   let pink = color(227, 132, 163, 200);
+  let mainSheepColour;
+  let middleWoolColour;
+  let outlineOfSheep;
+  let shadowColour;
+  let shineyWoolColour;
+
+  if (wool_colour == 1){
+    mainSheepColour = color('#BF8665'); // brown
+    middleWoolColour = color('#A6754B'); // greyish brown
+    outlineOfSheep = color('#593E25');
+    shadowColour = color('#8a623e');
+    shineyWoolColour = color('#D9A679');
+  } else if (wool_colour == 2){
+    mainSheepColour = color(250, 249, 230); // cream
+    middleWoolColour = color(235, 240, 219); // middle cream
+    outlineOfSheep = color(54, 49, 92); // navy blue
+    shadowColour = color(224, 224, 206); // shadow cream
+    shineyWoolColour = color('white');
+  } else {
+    mainSheepColour = color('#A6A6A6'); // grey
+    middleWoolColour = color('#8C8B88'); // greyish
+    outlineOfSheep = color(54, 49, 92);
+    shadowColour = color('#8a8986');
+    shineyWoolColour = color('#BFBFBF');
+  }
   
   // ears
-  stroke(shadowCream);
+  stroke(shadowColour);
   strokeWeight(0.3);
-  drawEars(3, -4, PI/4);
+  drawEars(3, -4, ear_tilt, mainSheepColour, earrings);
   push();
   scale(-1, 1)
-  drawEars(3, -4, PI/4);
+  drawEars(3, -4, ear_tilt, mainSheepColour, earrings);
   pop();
 
   // Face
-  drawFace(centerX, centerY, cream, shadowCream, faceSize)
+  drawFace(centerX, centerY, mainSheepColour, shadowColour, faceSize)
 
   // draw wool
   for (let i = 0; i < fluffiList.length; i++){
     let drawShine = false;
     if (fluffiList[i].y > -5.5){
-      fill(shadowCream)
+      fill(shadowColour)
     } else if (fluffiList[i].y > -8) {
-      fill(middleCream)
+      fill(middleWoolColour)
     } else {
       drawShine = true;
-      fill(cream);
+      fill(mainSheepColour);
     }
     noStroke();
     circle(fluffiList[i].x, fluffiList[i].y, 5);
 
     if (drawShine){
-      fill('white')
+      fill(shineyWoolColour)
       drawRoundedTriangle(fluffiList[i].x-1, fluffiList[i].y-1, 0.7, 0.7)
     }
   }
   
   // Pupils
-  fill(navyblue);
-  stroke(navyblue);
+  fill(outlineOfSheep);
+  stroke(outlineOfSheep);
+  let eyeLashX = centerX - distanceBetweenEyes/2;
   let pupilX = centerX - distanceBetweenEyes/2 + pupilDirectionX * 0.5;
   let pupilY = centerY - faceSize*0.1 + pupilDirectionY * 0.5;
-  line(pupilX, pupilY, pupilX-1, pupilY) // eyelashes
+  line(eyeLashX, pupilY, eyeLashX-1, pupilY) // eyelashes
   ellipse(pupilX, pupilY, eyeSize*0.5, eyeSize*0.5);
+  let eyeLashX2 = centerX + distanceBetweenEyes/2;
   let pupilX2 = centerX + distanceBetweenEyes/2 + pupilDirectionX * 0.5;
   let pupilY2 = centerY - faceSize*0.1 + pupilDirectionY * 0.5;
-  line(pupilX2, pupilY2, pupilX2+1, pupilY2) // line for eyelashes
+  line(eyeLashX2, pupilY2, eyeLashX2+1, pupilY2) // line for eyelashes
   ellipse(pupilX2, pupilY2, eyeSize*0.5, eyeSize*0.5);
 
   drawCheeksAndNose(centerX, centerY, pink);
@@ -142,7 +166,7 @@ function mostJoyfulSheep(fluffiList, eyeSize, faceSize, eyeLashLength, woolColou
   // smile 
   push();
   noFill();
-  stroke(navyblue);
+  stroke(outlineOfSheep);
   strokeWeight(0.3)
   scale(1.5, 1)
   arc(-0.5, 3, 1, 1, 0, PI, OPEN);
@@ -192,18 +216,39 @@ function drawFace(centerX, centerY, mainColour, shadowColor, faceSize){
   ellipse(centerX, centerY, faceSize-1.5, faceSize*1.05-1.5);
 }
 
-function drawEars(x, y, rotation){
+function drawEars(x, y, rotation, mainSheepColour, earrings){
   push();
   rotate(rotation);
-  translate(rotation, -rotation)
-  fill(250, 249, 230);
+  translate(rotation, -rotation);
+  fill(mainSheepColour);
   arc(x, y, 5, 3, 0, PI, OPEN);
   arc(x, y+0.1, 5, 2, PI, 0, OPEN);
   arc(x, y+0.5, 3.5, 1, PI, 0, OPEN);
-  fill(199, 139, 159, 200) //transparent pink 
+  fill(199, 139, 159, 200); //transparent pink
   noStroke();
-  ellipse(x, y+0.55, 3.5, 1)
+  ellipse(x, y+0.55, 3.5, 1);
+
+  
+  if (earrings == 1){
+    // two blue earrings on each ear
+    fill('#004B87'); // dark blue
+    ellipse(x+2, y+1, 0.7, 0.7);
+    ellipse(x+2, y+2, 2.5, 1);
+    fill('#2BA4DD') // light blue
+    ellipse(x+1.2, y+2, 0.5, 0.5);
+    ellipse(x+2, y+2, 0.5, 0.5);
+    ellipse(x+2.7, y+2, 0.5, 0.5);
+  } else if (earrings == 2){
+    // no earrings
+  } else {
+    // orange and purple square earrings on top of one another
+    fill('purple');
+    rect(x+1.5, y+0.5, 1, 1);
+    fill('orange')
+    rect(x+2.2, y+1.2, 1, 1);
+  }
   pop();
+
 }
 
 // https://editor.p5js.org/golan/sketches/P-NxlPAOa 

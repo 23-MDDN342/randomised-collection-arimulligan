@@ -6,7 +6,7 @@ const canvasWidth = 960;
 const canvasHeight = 500;
 const bg_color = [71, 222, 219];
 let slider1, slider2, slider3, slider4, slider5;
-let slider6, slider7, slider8, slider9, slider10;
+let slider6, slider7;
 let faceSelector;
 let faceGuideCheckbox;
 let fluffyList
@@ -15,18 +15,18 @@ function setup () {
   // create the drawing canvas, save the canvas element
   let main_canvas = createCanvas(canvasWidth, canvasHeight);
   main_canvas.parent('canvasContainer');
+
+  // make random coordinates for head fluff
   fluffyList = getRandomCoordinates(20);
+  
   // create sliders
-  slider1 = createSlider(0, 100, 50);
-  slider2 = createSlider(0, 100, 50);
+  slider1 = createSlider(0, 100, 70);
+  slider2 = createSlider(0, 100, 25);
   slider3 = createSlider(0, 100, 50);
   slider4 = createSlider(0, 100, 50);
   slider5 = createSlider(0, 100, 50);
   slider6 = createSlider(0, 100, 50);
   slider7 = createSlider(0, 100, 50);
-  slider8 = createSlider(0, 100, 50);
-  slider9 = createSlider(0, 100, 50);
-  slider10 = createSlider(0, 100, 50);
 
   slider1.parent('slider1Container');
   slider2.parent('slider2Container');
@@ -35,9 +35,6 @@ function setup () {
   slider5.parent('slider5Container');
   slider6.parent('slider6Container');
   slider7.parent('slider7Container');
-  slider8.parent('slider8Container');
-  slider9.parent('slider9Container');
-  slider10.parent('slider10Container');
 
   faceGuideCheckbox = createCheckbox('', true);
   faceGuideCheckbox.parent('checkbox1Container');
@@ -66,9 +63,6 @@ function draw () {
   let s5 = slider5.value();
   let s6 = slider6.value();
   let s7 = slider7.value();
-  let s8 = slider8.value();
-  let s9 = slider9.value();
-  let s10 = slider10.value();
 
   let show_face_guide = faceGuideCheckbox.checked();
 
@@ -85,14 +79,15 @@ function draw () {
   push();
   if (mode == '1') {
    // draw face using values mapped from 3 sliders
-   let tilt_value = map(s1, 0, 100, -90, 90);
-   let mouth_value = map(s2, 0, 100, 0.5, 20);
-   let eye_value = int(map(s3, 0, 100, 1, 3));
-   let woolColour = color(123, 3, 5, 50);
-   let eyeLashLength = map(s4, 0, 100, 1.5, 2.4);
+   let ear_tilt = map(s1, 0, 100, 0.3, 1.1);
+   let face_size = map(s2, 0, 100, 10, 15);
+   let wool_colour = int(map(s3, 0, 100, 1, 4));
+   let earrings = int(map(s4, 0, 100, 1, 4));
    let eyeSize = map(s5, 0, 100, 1, 4);
+   let eye_direction_x = map(s6, 0, 100, -0.5, 0.5);
+   let eye_direction_y = map(s7, 0, 100, 0, 2);
   
-   mostJoyfulSheep(fluffyList, eyeSize, mouth_value, eyeLashLength, woolColour, 0, 1, 0);
+   mostJoyfulSheep(fluffyList, eyeSize, face_size, ear_tilt, wool_colour, eye_direction_x, eye_direction_y, earrings);
   }
 
   if (mode == '2') {

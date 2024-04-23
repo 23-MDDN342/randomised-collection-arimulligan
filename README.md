@@ -9,3 +9,13 @@ In the first few weeks, I am deciding on creating different sheeps' faces with v
 Currently trying to work on the wool around the face to change. 
 
 The purpose for doing this was to show someone who has the joy of the Lord set before them, and the light and love that they can share with the people around them. It is also how people who don't have Jesus in their life are lost sheep. 
+
+I have now created my first happy sheep! I have finally decided on the parameters that I'll be using which are:
+    fluffiList - a function which returns the random placement of the sheeps head fluff. This is not a parameter which can be used on the editor slider. I purposefully made the head fluff go above the guidelines, as the face itself has space underneath it for other sheeps' fluff to go over the lines.
+    eyeSize - the size of the pupils, makes the sheep either look really tired or really high.
+    faceSize - sheep all weigh differently just like us!
+    ear_tilt - thought it looks cute if some are droopy and some are barely visible.
+    pupilDirectionX, 
+    pupilDirectionY, 
+    wool_colour - All of the above are continuous variables. These last two parameters are discrete. For the colour, there are three options: brown, greyish or white, as I wanted to make it authentic sheep colours.
+    earrings - I thought the sheep needed some detail, so I added two types of earrings, and then an option of no earrings.
