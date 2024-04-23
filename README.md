@@ -19,3 +19,5 @@ I have now created my first happy sheep! I have finally decided on the parameter
     pupilDirectionY, 
     wool_colour - All of the above are continuous variables. These last two parameters are discrete. For the colour, there are three options: brown, greyish or white, as I wanted to make it authentic sheep colours.
     earrings - I thought the sheep needed some detail, so I added two types of earrings, and then an option of no earrings.
+
+I have now added in this one face to the arrangement to see the different randomness, and changed the liklihood of different random numbers, so it looks thoughtfully random. 

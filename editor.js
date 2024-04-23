@@ -78,7 +78,6 @@ function draw () {
 
   push();
   if (mode == '1') {
-   // draw face using values mapped from 3 sliders
    let ear_tilt = map(s1, 0, 100, 0.3, 1.1);
    let face_size = map(s2, 0, 100, 10, 15);
    let wool_colour = int(map(s3, 0, 100, 1, 4));
