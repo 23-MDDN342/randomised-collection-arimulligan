@@ -32,7 +32,7 @@ function changeRandomSeed() {
 }
 
 // global variables for colors
-const bg_color1 = [27, 42, 107]
+const bg_color1 = [37, 69, 30]
 
 function mouseClicked() {
   changeRandomSeed();
@@ -53,19 +53,19 @@ function draw () {
 
   // clear screen
   background(bg_color1);
-  push();
-  rotate(PI/7)
-  translate(100, -400)
-  image(bookImg, 0, 0, bookImg.width, bookImg.height);
+  // push();
+  // rotate(PI/7)
+  // translate(100, -400)
+  // image(bookImg, 0, 0, bookImg.width, bookImg.height);
   
   noStroke();
 
-  translate(720, 180)
+  // translate(720, 180)
   // draw a 7x4 grid of faces
   let w = canvasWidth / 10.5;
   let h = canvasHeight / 6;
-  for(let i=0; i<3; i++) {
-    for(let j=0; j<1; j++) {
+  for(let i=0; i<5; i++) {
+    for(let j=0; j<5; j++) {
       // how dense the sheeps wool will be
       let wool_density = getAveragedRandom(20, 30, 2);
       if (wool_density < 21.5){ wool_density = 0; } // bald!!
@@ -88,8 +88,8 @@ function draw () {
       let eye_direction_x = random(-0.5, 0.5);
       let eye_direction_y = random(0, 2);
       
-      let y = h/2 + h*i;
-      let x = w/2 + w*j;
+      let y = h + h*i;
+      let x = w*3 + w*j;
       push();
       translate(x, y);
       scale(w/25, h/25);
@@ -100,7 +100,7 @@ function draw () {
     }
   }
 
-  pop();
+  // pop();
 }
 
 function keyTyped() {
