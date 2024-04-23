@@ -9,6 +9,7 @@ let curRandomSeed = 0;
 let lastSwapTime = 0;
 const millisPerSwap = 3000;
 let bookImg;
+let sheepEmotion = 'full of joy';
 
 function setup () {
   // create the drawing canvas, save the canvas element
@@ -35,6 +36,11 @@ const bg_color1 = [27, 42, 107]
 
 function mouseClicked() {
   changeRandomSeed();
+  changeSheepEmotions();
+}
+
+function changeSheepEmotions(){
+  sheepEmotion = 'tired';
 }
 
 function draw () {
@@ -67,8 +73,10 @@ function draw () {
       // make a list of random coordinates for head fluff based on face size
       let fluffyList;
       if (face_size >= 13){
+        // big and wide
         fluffyList = getRandomCoordinates(-face_size+2, -7, 7, wool_density);
       } else if (face_size <= 11){
+        // tall and skinny
         fluffyList = getRandomCoordinates(-15, -3, 3, wool_density);
       } else {
         fluffyList = getRandomCoordinates(-face_size+2, -5, 5, wool_density);
@@ -85,7 +93,8 @@ function draw () {
       push();
       translate(x, y);
       scale(w/25, h/25);
-      mostJoyfulSheep(fluffyList, eyeSize, face_size, ear_tilt, wool_colour, eye_direction_x, eye_direction_y, earrings);
+      mysheep = new Sheep(fluffyList, eyeSize, face_size, ear_tilt, wool_colour, eye_direction_x, eye_direction_y, earrings);
+      mysheep.drawSheepFace(sheepEmotion);
       pop();
       
     }

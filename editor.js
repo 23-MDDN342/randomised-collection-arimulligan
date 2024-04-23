@@ -77,24 +77,25 @@ function draw () {
   scale(face_scale);
 
   push();
-  if (mode == '1') {
-   let ear_tilt = map(s1, 0, 100, 0.3, 1.1);
-   let face_size = map(s2, 0, 100, 10, 15);
-   let wool_colour = int(map(s3, 0, 100, 1, 4));
-   let earrings = int(map(s4, 0, 100, 1, 4));
-   let eyeSize = map(s5, 0, 100, 1, 4);
-   let eye_direction_x = map(s6, 0, 100, -0.5, 0.5);
-   let eye_direction_y = map(s7, 0, 100, 0, 2);
-  
-   mostJoyfulSheep(fluffyList, eyeSize, face_size, ear_tilt, wool_colour, eye_direction_x, eye_direction_y, earrings);
-  }
 
+  // create new sheep
+  let ear_tilt = map(s1, 0, 100, 0.3, 1.1);
+  let sheep_face_size = map(s2, 0, 100, 10, 15);
+  let wool_colour = int(map(s3, 0, 100, 1, 4));
+  let earrings = int(map(s4, 0, 100, 1, 4));
+  let eyeSize = map(s5, 0, 100, 1, 4);
+  let eye_direction_x = map(s6, 0, 100, -0.5, 0.5);
+  let eye_direction_y = map(s7, 0, 100, 0, 2);
+  mysheep = new Sheep(fluffyList, eyeSize, sheep_face_size, ear_tilt, wool_colour, eye_direction_x, eye_direction_y, earrings);
+  
+  if (mode == '1') {
+    mysheep.drawSheepFace('full of joy');
+  }
   if (mode == '2') {
-     // let slider value 1 indicate thinness
-     blockyFace(s1);
+    mysheep.drawSheepFace('tired');
   }
   if (mode == '3') {
-    simplePurpleFace();
+    mysheep.drawSheepFace('depressed');
   }
 
   pop();

@@ -23,6 +23,8 @@ I have now created my first happy sheep! I have finally decided on the parameter
 I have now added in this one face to the arrangement to see the different randomness, and changed the liklihood of different random numbers, so it looks thoughtfully random. 
 
 Working on for next time: **Arrangement**.
- - nose maybe should be bigger
- - when mouse goes on the sheep, it changes to shepherd and sheep get really happy. changes to sad face when mouse goes off of it. 
+ - when mouse goes on the sheep, it changes to shepherd and sheep get really happy. changes to sad face when mouse goes off of it.
     - use mouseOver on image, and the function inside it will change the boolean variables faceHappy to true!!!
+
+Made the sheep faces!! There are 3 types: full of joy, tired, and depressed.
+The reason I have made the sheep 'humanized' is because the sheep are a metaphor for us humans. The metaphor is from the bible: we are the sheep, God is the shepherd, and Jesus is the gate to enter into the paddock (our relationship) with God the shepherd. I will be putting in a shepherd at some point, and then putting joyful sheep faces inside the paddock with Him, and the sheep outside this paddock will be tired and depressed. Because these sheep are the lost sheep - they are doing life without God.
