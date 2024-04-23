@@ -21,3 +21,8 @@ I have now created my first happy sheep! I have finally decided on the parameter
     earrings - I thought the sheep needed some detail, so I added two types of earrings, and then an option of no earrings.
 
 I have now added in this one face to the arrangement to see the different randomness, and changed the liklihood of different random numbers, so it looks thoughtfully random. 
+
+Working on for next time: **Arrangement**.
+ - nose maybe should be bigger
+ - when mouse goes on the sheep, it changes to shepherd and sheep get really happy. changes to sad face when mouse goes off of it. 
+    - use mouseOver on image, and the function inside it will change the boolean variables faceHappy to true!!!

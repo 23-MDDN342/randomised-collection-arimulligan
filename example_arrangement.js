@@ -8,6 +8,7 @@ let curRandomSeed = 0;
 
 let lastSwapTime = 0;
 const millisPerSwap = 3000;
+let bookImg;
 
 function setup () {
   // create the drawing canvas, save the canvas element
@@ -16,8 +17,12 @@ function setup () {
 
   curRandomSeed = int(random(0, 1000));
 
-  // rotation in degrees
+  // rotation in radians
   angleMode(RADIANS);
+
+  // load background
+  bookImg = loadImage('openBookImg.png');
+  
 }
 
 function changeRandomSeed() {
@@ -26,7 +31,7 @@ function changeRandomSeed() {
 }
 
 // global variables for colors
-const bg_color1 = [71, 222, 219]
+const bg_color1 = [27, 42, 107]
 
 function mouseClicked() {
   changeRandomSeed();
@@ -42,28 +47,38 @@ function draw () {
 
   // clear screen
   background(bg_color1);
+  push();
+  rotate(PI/7)
+  translate(100, -400)
+  image(bookImg, 0, 0, bookImg.width, bookImg.height);
+  
   noStroke();
 
+  translate(720, 180)
   // draw a 7x4 grid of faces
-  let w = canvasWidth / 7;
-  let h = canvasHeight / 4;
-  for(let i=0; i<4; i++) {
-    for(let j=0; j<7; j++) {
-      // draw face using values mapped from 3 sliders
+  let w = canvasWidth / 10.5;
+  let h = canvasHeight / 6;
+  for(let i=0; i<3; i++) {
+    for(let j=0; j<1; j++) {
+      // how dense the sheeps wool will be
+      let wool_density = getAveragedRandom(20, 30, 2);
+      if (wool_density < 21.5){ wool_density = 0; } // bald!!
       let face_size = random(10, 15);
-      let ear_tilt;
+      // make a list of random coordinates for head fluff based on face size
+      let fluffyList;
       if (face_size >= 13){
-        ear_tilt = random(0.8, 1.1);
+        fluffyList = getRandomCoordinates(-face_size+2, -7, 7, wool_density);
+      } else if (face_size <= 11){
+        fluffyList = getRandomCoordinates(-15, -3, 3, wool_density);
       } else {
-        ear_tilt = random(0.3, 0.8);
+        fluffyList = getRandomCoordinates(-face_size+2, -5, 5, wool_density);
       }
-      let wool_colour = int(getAveragedRandom(1, 4, 2));
-      let earrings = int(random(1, 4));
+      let ear_tilt = random(0.3, 1.1);
+      let wool_colour = int(getAveragedRandom(1, 4.3, 2));
+      let earrings = int(getAveragedRandom(1, 4, 3));
       let eyeSize = getAveragedRandom(1, 3.5, 2);
       let eye_direction_x = random(-0.5, 0.5);
       let eye_direction_y = random(0, 2);
-      // make a list of random coordinates for head fluff
-      let fluffyList = getRandomCoordinates(20);
       
       let y = h/2 + h*i;
       let x = w/2 + w*j;
@@ -75,6 +90,8 @@ function draw () {
       
     }
   }
+
+  pop();
 }
 
 function keyTyped() {
@@ -87,14 +104,11 @@ function keyTyped() {
 }
 
 // from ChatGBT
-function getRandomCoordinates(numCoordinates) {
+function getRandomCoordinates(minY, minX, maxX, density) {
   const coordinates = [];
-  const minY = -10;
   const maxY = -4;
-  const minX = -5;
-  const maxX = 5;
 
-  for (let i = 0; i < numCoordinates; i++) {
+  for (let i = 0; i < density; i++) {
       const x = random(minX, maxX);
       const y = random(minY, maxY);
       coordinates.push({ x, y });

@@ -107,12 +107,19 @@ function mostJoyfulSheep(fluffiList, eyeSize, faceSize, ear_tilt, wool_colour, p
     outlineOfSheep = color(54, 49, 92); // navy blue
     shadowColour = color(224, 224, 206); // shadow cream
     shineyWoolColour = color('white');
-  } else {
+  } else if (wool_colour == 3){
     mainSheepColour = color('#A6A6A6'); // grey
     middleWoolColour = color('#8C8B88'); // greyish
     outlineOfSheep = color(54, 49, 92);
     shadowColour = color('#8a8986');
     shineyWoolColour = color('#BFBFBF');
+  } else {
+    // the black sheep
+    mainSheepColour = color('#4a4848');
+    middleWoolColour = color('#3d3c3c');
+    outlineOfSheep = color('black');
+    shadowColour = color('#2e2d2d');
+    shineyWoolColour = color('#636161');
   }
   
   // ears
@@ -161,6 +168,9 @@ function mostJoyfulSheep(fluffiList, eyeSize, faceSize, ear_tilt, wool_colour, p
   line(eyeLashX2, pupilY2, eyeLashX2+1, pupilY2) // line for eyelashes
   ellipse(pupilX2, pupilY2, eyeSize*0.5, eyeSize*0.5);
 
+  // move cheeks, nose and mouth down according to faceSize 
+  push();
+  translate(centerX, faceSize/10)
   drawCheeksAndNose(centerX, centerY, pink);
 
   // smile 
@@ -173,7 +183,7 @@ function mostJoyfulSheep(fluffiList, eyeSize, faceSize, ear_tilt, wool_colour, p
   arc(0.5, 3, 1, 1, 0, PI, OPEN);
   pop();
 
-
+  pop();
 }
 
 function drawCheeksAndNose(centerX, centerY, pink){
@@ -209,11 +219,12 @@ function drawCheeksAndNose(centerX, centerY, pink){
 function drawFace(centerX, centerY, mainColour, shadowColor, faceSize){
   stroke(shadowColor);
   fill(shadowColor)
-  ellipse(centerX, centerY, faceSize, faceSize*1.05);
+  // changed faceSize to only affect the length of face because sheeps' faces usually go longer, not wider.
+  ellipse(centerX, centerY, 11, faceSize*1.05);
 
   noStroke();
   fill(mainColour);
-  ellipse(centerX, centerY, faceSize-1.5, faceSize*1.05-1.5);
+  ellipse(centerX, centerY, 10, faceSize*1.05-1.5);
 }
 
 function drawEars(x, y, rotation, mainSheepColour, earrings){
