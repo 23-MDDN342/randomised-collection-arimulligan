@@ -2,8 +2,7 @@
 ## 2024 MDDN342 Assignment 2: Randomised Collections
 
 **This is where you talk about your project!**
-
->This starter code is just some simple faces being drawn. 
+### The Good Shepherd
 
 In the first few weeks, I am deciding on creating different sheeps' faces with varying inputs. The inputs that I will be keeping the ame are the facial expressions - as I will be making a joyful sheep face in the middle with sadder faces going further out from these happier faces. 
 Currently trying to work on the wool around the face to change. 
@@ -28,3 +27,17 @@ Working on for next time: **Arrangement**.
 
 Made the sheep faces!! There are 3 types: full of joy, tired, and depressed.
 The reason I have made the sheep 'humanized' is because the sheep are a metaphor for us humans. The metaphor is from the bible: we are the sheep, God is the shepherd, and Jesus is the gate to enter into the paddock (our relationship) with God the shepherd. I will be putting in a shepherd at some point, and then putting joyful sheep faces inside the paddock with Him, and the sheep outside this paddock will be tired and depressed. Because these sheep are the lost sheep - they are doing life without God.
+
+● Final longer README includes summary of parameters
+● Final longer README summarizes the overall design
+● The README captures the scope and detail of the design process
+● Final version includes a sketch.html with part1 sketch
+●README is clear and discusses design decisions / influences well.
+Review the final README.md to make sure it provides a summary of your final work. Your final
+README should also list the parameters that are randomized to provide variability, whether they
+are discrete or continuous, and their bounds.
+Experiment with 2 of these 3 methods - each should be a separate section in your project README.
+This should include updated images (of a random grid). In the README talk about this type of
+advanced selection being made and the chance that various results will occur.
+In your README discuss how you decided the
+bounds of your parameters.

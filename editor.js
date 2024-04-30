@@ -36,8 +36,10 @@ function setup () {
   slider6.parent('slider6Container');
   slider7.parent('slider7Container');
 
-  faceGuideCheckbox = createCheckbox('', true);
+  faceGuideCheckbox = createCheckbox('', false);
   faceGuideCheckbox.parent('checkbox1Container');
+  bodyCheckbox = createCheckbox('', false);
+  bodyCheckbox.parent('checkbox2Container');
 
   faceSelector = createSelect();
   faceSelector.option('1');
@@ -65,6 +67,7 @@ function draw () {
   let s7 = slider7.value();
 
   let show_face_guide = faceGuideCheckbox.checked();
+  let show_body_guide = bodyCheckbox.checked();
 
   // use same size / y_pos for all faces
   let face_size = canvasWidth / 5;
@@ -89,12 +92,15 @@ function draw () {
   mysheep = new Sheep(fluffyList, eyeSize, sheep_face_size, ear_tilt, wool_colour, eye_direction_x, eye_direction_y, earrings);
   
   if (mode == '1') {
+    if (show_body_guide){mysheep.drawSheepBody();}
     mysheep.drawSheepFace('full of joy');
   }
   if (mode == '2') {
+    if (show_body_guide){mysheep.drawSheepBody();}
     mysheep.drawSheepFace('tired');
   }
   if (mode == '3') {
+    if (show_body_guide){mysheep.drawSheepBody();}
     mysheep.drawSheepFace('depressed');
   }
 

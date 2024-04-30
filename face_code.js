@@ -94,6 +94,76 @@ class Sheep {
     pop();
   }
 
+  drawSheepBody(sideways){
+    let hoovesColour;
+    let legColor;
+    let bodyColour;
+    if (this.wool_colour == 1){
+      bodyColour = color('#BF8665'); // brown
+      hoovesColour = color('#A6754B'); // greyish brown
+      legColor = color('#8a623e');
+    } else if (this.wool_colour == 2){
+      bodyColour = color(250, 249, 230); // cream
+      hoovesColour = color(235, 240, 219); // middle cream
+      legColor = color(224, 224, 206); // shadow cream
+    } else if (this.wool_colour == 3){
+      bodyColour = color('#A6A6A6'); // grey
+      hoovesColour = color('#8C8B88'); // greyish
+      legColor = color('#8a8986');
+    } else {
+      bodyColour = color('#4a4848'); // the black sheep
+      hoovesColour = color('#3d3c3c');
+      legColor = color('#2e2d2d');
+    }
+
+    if (sideways){
+      strokeWeight(0.5);
+      fill(legColor);
+      stroke(hoovesColour);
+      rect(-9, 16, 2, 3); // behind legs
+      rect(-12, 15, 2, 4);
+      circle(-15, 7, 4); // tail
+      fill(hoovesColour);
+      arc(-8, 19.5, 2, 1, PI, 0, OPEN); // behind hooves
+      arc(-11, 19.5, 2, 1, PI, 0, OPEN);
+      fill(bodyColour);
+      ellipse(-5, 10, 19, 15); // body
+      fill(legColor);
+      rect(-4, 14, 2, 6); // legs
+      rect(0, 14, 2, 6);
+      fill(bodyColour);
+      noStroke();
+      arc(-3, 13, 3, 3, 0, PI, OPEN); // fluff on legs
+      arc(1, 13, 3, 3, 0, PI, OPEN);
+      fill(hoovesColour);
+      stroke(legColor)
+      arc(-3, 20, 3, 2, PI, 0, OPEN); // hooves
+      arc(1, 20, 3, 2, PI, 0, OPEN);
+    } else {
+      strokeWeight(0.5);
+      fill(legColor);
+      stroke(hoovesColour);
+      rect(-3, 16, 2, 3); // behind legs
+      rect(1, 16, 2, 3);
+      fill(hoovesColour);
+      arc(-1.5, 19.3, 2, 1, PI, 0, OPEN); // behind hooves
+      arc(1.5, 19.3, 2, 1, PI, 0, OPEN);
+      fill(bodyColour);
+      ellipse(0, 10, 14, 15); // body
+      fill(legColor);
+      rect(-4, 14, 2, 6); // legs
+      rect(2, 14, 2, 6);
+      fill(bodyColour);
+      noStroke();
+      arc(-3, 13, 3, 3, 0, PI, OPEN); // fluff on legs
+      arc(3, 13, 3, 3, 0, PI, OPEN);
+      fill(hoovesColour);
+      stroke(legColor)
+      arc(-3, 20, 3, 2, PI, 0, OPEN); // hooves
+      arc(3, 20, 3, 2, PI, 0, OPEN);
+    }
+  }
+
   #drawEarsAndFaceShape(mainColour, shadowColor){
     // ears
     stroke(shadowColor);
