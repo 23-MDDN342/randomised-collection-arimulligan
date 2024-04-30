@@ -49,8 +49,6 @@ function setup () {
   faceSelector.parent('selector1Container');
 }
 
-
-
 function draw () {
   strokeWeight(0.2);
 
@@ -91,6 +89,7 @@ function draw () {
   let eye_direction_y = map(s7, 0, 100, 0, 2);
   mysheep = new Sheep(fluffyList, eyeSize, sheep_face_size, ear_tilt, wool_colour, eye_direction_x, eye_direction_y, earrings);
   
+  // can show body if u want
   if (mode == '1') {
     if (show_body_guide){mysheep.drawSheepBody();}
     mysheep.drawSheepFace('full of joy');
@@ -121,7 +120,11 @@ function draw () {
   pop();
 }
 
-// from ChatGBT
+/**
+ * From ChatGBT, altered to my code.
+ * @param {*} numCoordinates max coords you want
+ * @returns coordinates
+ */
 function getRandomCoordinates(numCoordinates) {
   const coordinates = [];
   const minY = -10;

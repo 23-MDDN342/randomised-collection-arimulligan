@@ -9,8 +9,6 @@ let curRandomSeed = 0;
 let lastSwapTime = 0;
 const millisPerSwap = 20000;
 let constLastSwapTime = 0;
-let sheepEmotion = 'full of joy';
-let drawImage = true;
 
 function setup () {
   // create the drawing canvas, save the canvas element
@@ -24,7 +22,6 @@ function setup () {
 
   // load background
   bookImg = loadImage('jesus-the-good-shepherd.png');
-  
 }
 
 function changeRandomSeed(mouseClicked) {
@@ -59,6 +56,88 @@ function draw () {
   background(bg_color1);
 
   // draw background
+  strokeWeight(6);
+  stroke(10, 10, 10, 50);
+  drawBackground();
+
+  let shepherd_gliding = map(millis(), constLastSwapTime, constLastSwapTime+millisPerSwap, -500, 2000);
+  
+  // draw flock of sheep
+  drawAllSheep(shepherd_gliding);
+
+  // draw shepherd
+  image(bookImg, shepherd_gliding, 200, bookImg.width/5, bookImg.height/5);
+}
+
+function keyTyped() {
+  if (key == '!') {
+    saveBlocksImages();
+  }
+  else if (key == '@') {
+    saveBlocksImages(true);
+  }
+}
+
+/**
+ * From ChatGBT, altered to my code.
+ * @param {*} minY 
+ * @param {*} minX 
+ * @param {*} maxX 
+ * @param {*} maxY 
+ * @param {*} density 
+ * @returns coordinates
+ */
+function getRandomCoordinates(minY, minX, maxX, maxY, density) {
+  const coordinates = [];
+
+  for (let i = 0; i < density; i++) {
+      const x = random(minX, maxX);
+      const y = random(minY, maxY);
+      coordinates.push({ x, y });
+  }
+
+  return coordinates;
+}
+
+/**
+ * From in class.
+ * @param {*} min min  number
+ * @param {*} max max number
+ * @param {*} n number of dice rolled (how average)
+ * @returns averaged random
+ */
+function getAveragedRandom(min, max, n) {
+  let sum = 0;
+  for(let i=0; i<n; i++) {
+    sum = sum + random(min, max);
+  }
+
+  return sum / n;
+}
+
+/**
+ * Makes sheep appear around the hills. Randomly, but not too bunched up.
+ * @param {*} minY 
+ * @param {*} minX 
+ * @param {*} maxX 
+ * @param {*} maxY 
+ * @returns 
+ */
+function getOrganisedCoordinates(minY, minX, maxX, maxY) {
+  const coordinates = [];
+
+  for (let i = minY; i < maxY; i++) {
+    for (let j = minX; j < maxX; j++) {
+      const x = random(j-1, j);
+      const y = random(i-1, i);
+      coordinates.push({ x, y });
+    }
+  }
+
+  return coordinates;
+}
+
+function drawBackground(){
   fill(237, 142, 47)
   ellipse(500, 120, 200);
   fill(22, 46, 17)
@@ -69,12 +148,14 @@ function draw () {
   fill(50, 99, 40)
   ellipse(100, canvasHeight, 900, 400);
   ellipse(canvasWidth-100, canvasHeight, 700, 400);
+}
 
-  let shepherd_gliding = map(millis(), constLastSwapTime, constLastSwapTime+millisPerSwap, -500, 2000);
-  let sheepPlacements = getRandomCoordinates(0.5, -1, 8, 1.5, 20);
-  noStroke();
-  
-  // draw a 7x4 grid of faces
+/**
+ * Draws the flock of sheep.
+ * @param {*} shepherd_gliding x-coordinate for following sheep from shepherd
+ */
+function drawAllSheep(shepherd_gliding){
+  let sheepPlacements = getOrganisedCoordinates(1.2, 0.2, 9, 2.2);
   let w = canvasWidth / 7;
   let h = canvasHeight / 4;
   for(let i=0; i<sheepPlacements.length; i++) {
@@ -108,10 +189,10 @@ function draw () {
     
     let sheep_gliding_behind_shepherd = shepherd_gliding - sheepPlacements[i].x*w/2;
     // made the sheeps size according to their emotion and how far away they are (the y coord)
-    let joyful_w = w/25 * sheepPlacements[i].y/1.5;
-    let joyful_h = h/25 * sheepPlacements[i].y/1.5;
-    let sad_w = w/28 * sheepPlacements[i].y/1.5;
-    let sad_h = h/28 * sheepPlacements[i].y/1.5;
+    let joyful_w = w/25 * sheepPlacements[i].y;
+    let joyful_h = h/25 * sheepPlacements[i].y;
+    let sad_w = w/28 * sheepPlacements[i].y;
+    let sad_h = h/28 * sheepPlacements[i].y;
     
     if (x < sheep_gliding_behind_shepherd){
       if (following_the_shepherd == 1){
@@ -140,46 +221,4 @@ function draw () {
     
     pop();
   }
-
-  // draw shepherd
-  image(bookImg, shepherd_gliding, 200, bookImg.width/5, bookImg.height/5);
-  
 }
-
-function keyTyped() {
-  if (key == '!') {
-    saveBlocksImages();
-  }
-  else if (key == '@') {
-    saveBlocksImages(true);
-  }
-}
-
-// from ChatGBT
-function getRandomCoordinates(minY, minX, maxX, maxY, density) {
-  const coordinates = [];
-
-  for (let i = 0; i < density; i++) {
-      const x = random(minX, maxX);
-      const y = random(minY, maxY);
-      coordinates.push({ x, y });
-  }
-
-  return coordinates;
-}
-
-// from in class
-function getAveragedRandom(min, max, n) {
-  let sum = 0;
-  for(let i=0; i<n; i++) {
-    sum = sum + random(min, max);
-  }
-
-  return sum / n;
-}
-
-/**
- * dear Lord, I pray that this arrangment will also go well, that you could show yourself through this project. that i would just be your feet and hands, in the Mighty name of Jesus, amen!
- * praise You Lord God! Thank you Jesus, praise you!!!
- * THANK YOU LORD GOD
-*/

@@ -1,12 +1,8 @@
-/*
- * This file should contain code that draws your faces.
- *
- * Each function takes parameters and draws a face that is within
- * the bounding box (-10, -10) to (10, 10).
- *
- * These functions are used by your final arrangement of faces as well as the face editor.
+/**
+ * This class has all the private functions to draw a sheep. Uses emotion to depict which type of face is to be drawn.
+ * You can draw the sheeps' body and face with the public functions provided.
+ * When you create a new sheep, you need to provide all the random parameters inside the constructor.
  */
-
 class Sheep {
 
   emotion;
@@ -22,6 +18,10 @@ class Sheep {
     this.earrings = earrings;
   }
 
+  /**
+   * Draws the sheeps face according to the parameters inside the constructor and the emotion. 
+   * @param {*} emotion can be 'full of joy', 'tired', or 'depressed'
+   */
   drawSheepFace(emotion){
     this.emotion = emotion;
     let pink = color(227, 132, 163, 200);
@@ -341,16 +341,3 @@ class Sheep {
     endShape(CLOSE);
   }
 }
-
-
-
-
-/**
- * dear Lord God, I pray you'll be able to give me fresh ideas to give You glory through this project and that you would 
- * create in me fresh revelation for the day. I pray I'll be able to have a good plan for tomorrow morning, that it will be 
- * all YOU speaking through me and that the topic and verses will create good discussion for the group. I pray You'll speak 
- * to each person in the group tomorrow. Thank you Lord Jesus for everything. Dying on the cross, taking up all our sins, 
- * enduring hardship and shedding blood for all of us. I thank You Lord God that You gave Your one and only Son to death, so 
- * that we could live. I pray I'd be able to give You glory today, and that Holy Spirit would lead and guide me, in the 
- * Might Name of Jesus, amen.
- */
